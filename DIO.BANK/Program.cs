@@ -9,12 +9,13 @@ namespace DIO.BANK
     {
         static List<Conta> listContas = new List<Conta>();
 
-        static Conta ContaForTest = new Conta((TipoConta)1, 1000, 1000, "Teste");
-
+        static Conta ContaTeste = new Conta((TipoConta)1,(TipoBanco)1, 1000, 1000, "ContaTeste");
+  
         public static void Main(string[] args)
         {
             Console.Clear();
-            listContas.Add(ContaForTest);
+            listContas.Add(ContaTeste);
+          
             string opcaoUsuario = ObterOpcaoUsuario();
 
             while (opcaoUsuario.ToUpper() != "X")
@@ -28,13 +29,13 @@ namespace DIO.BANK
                         InserirConta();
                         break;
                     case "3":
-                        //Transferir();
+                        Transferir();
                         break;
                     case "4":
                         Sacar();
                         break;
                     case "5":
-                        //Depositar();
+                        Depositar();
                         break;
                     case "C":
                         Console.Clear();
@@ -47,7 +48,7 @@ namespace DIO.BANK
             }
         }
 
-
+       
 
         private static string ObterOpcaoUsuario()
         {
@@ -77,6 +78,9 @@ namespace DIO.BANK
             Console.Write("Digite 1 para Conta Física ou 2 para Juridica: ");
             int inputTipoConta = int.Parse(Console.ReadLine());
 
+            Console.Write("Qual banco deseja abrir conta ? Digite 1 para Tradicional ou 2 para Banco Inter: ");
+            int inputTipoBanco = int.Parse(Console.ReadLine());
+
             Console.Write("Digite o Nome do Cliente: ");
             string inputNome = Console.ReadLine();
 
@@ -86,10 +90,25 @@ namespace DIO.BANK
             Console.Write("Digite o crédito: ");
             double inputCredito = double.Parse(Console.ReadLine());
 
-            Conta novaConta = new Conta(tipoConta: (TipoConta)inputTipoConta,
+            Conta novaConta = new Conta(tipoConta: (TipoConta)inputTipoConta, tipoBanco: (TipoBanco)inputTipoBanco,
                 saldo: inputSaldo, credito: inputCredito, nome: inputNome);
 
             listContas.Add(novaConta);
+        }
+
+        private static void Transferir()
+        {
+            Console.Write("Digite o número da conta de origem: ");
+            int indiceContaOrigem = int.Parse(Console.ReadLine());
+
+            Console.Write("Digite o número da conta de destino: ");
+            int indiceContaDestino = int.Parse(Console.ReadLine());
+
+            Console.Write("Digite o valor a ser transferido: ");
+            double valorTransferencia = double.Parse(Console.ReadLine());
+
+            listContas[indiceContaOrigem].Transferir(valorTransferencia, listContas[indiceContaDestino]);
+
         }
 
         private static void ListarContas()
@@ -120,9 +139,19 @@ namespace DIO.BANK
             double valorDeposito = double.Parse(Console.ReadLine());
 
             listContas[indiceConta].Sacar(valorDeposito);
+            
         }
 
+        private static void Depositar()
+        {
+            Console.Write("Digite o número da conta: ");
+            int indiceConta = int.Parse(Console.ReadLine());
 
+            Console.Write("Digite o valor a ser depositado: ");
+            double valorDeposito = double.Parse(Console.ReadLine());
+
+            listContas[indiceConta].Depositar(valorDeposito);
+        }
     }
 
 }

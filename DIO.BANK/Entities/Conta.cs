@@ -5,15 +5,21 @@ namespace DIO.BANK.Entities
 {
     public class Conta
     {
-        public Conta(TipoConta tipoConta, double saldo, double credito, string nome)
+        Banco banco = new Banco();
+
+        public Conta(TipoConta tipoConta, TipoBanco tipoBanco, double saldo, double credito, string nome)
         {
             TipoConta = tipoConta;
+            TipoBanco = tipoBanco;
             Saldo = saldo;
             Credito = credito;
             Nome = nome;
+            
         }
 
         private TipoConta TipoConta { get; set; }
+
+        public TipoBanco TipoBanco { get; set; }
 
         private double Saldo { get; set; }
 
@@ -21,16 +27,21 @@ namespace DIO.BANK.Entities
 
         private string Nome { get; set; }
 
+        
+
         public bool Sacar(double valorSaque)
         {
-            if (Saldo - valorSaque < (this.Credito * -1))
+            
+
+            if (Saldo - (valorSaque + banco.TaxaSaque(TipoBanco)) < (this.Credito * -1))
             {
                 Console.WriteLine("Saldo insuficiente!");
                 return false;
             }
 
-            Saldo -= valorSaque;
-            Console.WriteLine("Saldo atual da conta de {0} é {1}", Nome, Saldo);
+            Saldo -= valorSaque + banco.TaxaSaque(TipoBanco);
+            Console.WriteLine("Saldo atual da conta de {0} é R$ {1}. Taxa debitada: R$ {2}", Nome, Saldo.ToString
+                ("N2"), banco.TaxaSaque(TipoBanco));
 
             return true;
 
@@ -38,16 +49,18 @@ namespace DIO.BANK.Entities
 
         public void Depositar(double valorDeposito)
         {
-            Saldo += valorDeposito;
+            Saldo += (valorDeposito - banco.TaxaDeposito(TipoBanco));
 
-            Console.WriteLine("Saldo atual da conta de {0} é {1}", Nome, Saldo);
+            Console.WriteLine("Saldo atual da conta de {0} é R$ {1}. Taxa debitada: R$ {2}", Nome, Saldo.ToString
+                ("N2"), banco.TaxaSaque(TipoBanco));
+           
         }
 
         public void Transferir(double valorTransferencia, Conta contaDestino)
         {
             if (Sacar(valorTransferencia))
             {
-                contaDestino.Depositar(valorTransferencia);
+                contaDestino.Saldo += valorTransferencia;
             }
         }
 
@@ -55,11 +68,11 @@ namespace DIO.BANK.Entities
         {
             string retorno = "";
             retorno += "TipoConta: " + TipoConta + " | ";
+            retorno += "TipoBanco: " + TipoBanco + "| ";
             retorno += "Nome: " + Nome + " | ";
-            retorno += "Saldo: R$ " + Saldo + " | ";
+            retorno += "Saldo: R$ " + Saldo.ToString("N2") + " | ";
             retorno += "Crédito: R$ " + Credito + " | ";
             return retorno;
         }
-
     }
 }
