@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.809.2
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DIO.BANK", "DIO.BANK\DIO.BANK.csproj", "{63122E51-54F1-46AB-95C5-DF9513D1249A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|anycpu = Debug|anycpu
+		Release|anycpu = Release|anycpu
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{63122E51-54F1-46AB-95C5-DF9513D1249A}.Debug|anycpu.ActiveCfg = Debug|anycpu
+		{63122E51-54F1-46AB-95C5-DF9513D1249A}.Debug|anycpu.Build.0 = Debug|anycpu
+		{63122E51-54F1-46AB-95C5-DF9513D1249A}.Release|anycpu.ActiveCfg = Release|anycpu
+		{63122E51-54F1-46AB-95C5-DF9513D1249A}.Release|anycpu.Build.0 = Release|anycpu
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C26DE72B-A64A-44F2-97DD-98919B8985DF}
+	EndGlobalSection
+EndGlobal
