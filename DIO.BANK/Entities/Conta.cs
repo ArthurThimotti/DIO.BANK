@@ -54,10 +54,10 @@ namespace DIO.BANK.Entities
         public override string ToString()
         {
             string retorno = "";
-            retorno += "TipoConta " + TipoConta + " | ";
-            retorno += "Nome " + Nome + " | ";
-            retorno += "Saldo R$ " + Saldo + " | ";
-            retorno += "Crédito R$" + Credito + " | ";
+            retorno += "TipoConta: " + TipoConta + " | ";
+            retorno += "Nome: " + Nome + " | ";
+            retorno += "Saldo: R$ " + Saldo + " | ";
+            retorno += "Crédito: R$ " + Credito + " | ";
             return retorno;
         }
 
