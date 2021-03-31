@@ -1,12 +1,13 @@
 ﻿using System;
+using DIO.BANK.Entities;
 
 namespace DIO.BANK
 {
-    class MainClass
+    class Program
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+           
         }
     }
 }
